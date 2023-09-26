@@ -1,0 +1,26 @@
+{
+  "name": "pixel-fighters",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "tailwind": "tailwindcss -i src/assets/css/tailwind.base.css -o public/css/tailwind.compiled.css --watch",
+    "dev:tail": "concurrently \"npm run dev\" \"npm run tailwind\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.1",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "autoprefixer": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest"
+  }
+}
