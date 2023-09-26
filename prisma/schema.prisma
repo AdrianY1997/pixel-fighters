@@ -42,13 +42,13 @@ model Dojo {
 
 model Publication {
   publication_id           String    @id @default(uuid())
-  publication_calification Float
-  publication_content      String
-  publication_datecreated  DateTime
-  publication_dojo         Dojo      @relation(fields: [dojoDojo_id], references: [dojo_id])
-  publication_event        Boolean
-  publication_member       User      @relation(fields: [userUser_id], references: [user_id])
   publication_title        String
+  publication_content      String
+  publication_calification Float
+  publication_datecreated  DateTime
+  publication_event        Int
+  publication_dojo         Dojo      @relation(fields: [dojoDojo_id], references: [dojo_id])
+  publication_member       User      @relation(fields: [userUser_id], references: [user_id])
   Comment                  Comment[]
   dojoDojo_id              String
   userUser_id              String
@@ -58,6 +58,7 @@ model Comment {
   comment_id                String      @id @default(uuid())
   comment_member            User        @relation(fields: [userUser_id], references: [user_id])
   comment_publication       Publication @relation(fields: [publicationPublication_id], references: [publication_id])
+  comment_datecreated       DateTime
   comment_description       String
   userUser_id               String
   publicationPublication_id String
