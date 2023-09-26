@@ -6,6 +6,67 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id          String        @id @default(uuid())
+  user_name        String
+  user_email       String
+  user_password    String
+  user_level       String
+  user_role        String
+  user_datecreated DateTime
+  Comment          Comment[]
+  DojoMember       DojoMember[]
+  Publication      Publication[]
+}
+
+model Category {
+  category_id          String  @id @default(uuid())
+  category_name        String?
+  category_description String?
+
+  Dojo Dojo[]
+}
+
+model Dojo {
+  dojo_id             String        @id @default(uuid())
+  dojo_name           String
+  dojo_category       Category      @relation(fields: [categoryCategory_id], references: [category_id])
+  categoryCategory_id String
+  DojoMember          DojoMember[]
+  Publication         Publication[]
+}
+
+model Publication {
+  publication_id           String    @id @default(uuid())
+  publication_calification Float
+  publication_content      String
+  publication_datecreated  DateTime
+  publication_dojo         Dojo      @relation(fields: [dojoDojo_id], references: [dojo_id])
+  publication_event        Boolean
+  publication_member       User      @relation(fields: [userUser_id], references: [user_id])
+  publication_title        String
+  Comment                  Comment[]
+  dojoDojo_id              String
+  userUser_id              String
+}
+
+model Comment {
+  comment_id                String      @id @default(uuid())
+  comment_member            User        @relation(fields: [userUser_id], references: [user_id])
+  comment_publication       Publication @relation(fields: [publicationPublication_id], references: [publication_id])
+  comment_description       String
+  userUser_id               String
+  publicationPublication_id String
+}
+
+model DojoMember {
+  member_id   String @id @default(uuid())
+  member_user User   @relation(fields: [userUser_id], references: [user_id])
+  member_dojo Dojo   @relation(fields: [dojoDojo_id], references: [dojo_id])
+  userUser_id String
+  dojoDojo_id String
 }
