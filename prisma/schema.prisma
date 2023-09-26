@@ -16,7 +16,7 @@ model User {
   user_email       String
   user_password    String
   user_level       String
-  user_role        String
+  user_role        Int
   user_datecreated DateTime
   Comment          Comment[]
   DojoMember       DojoMember[]
