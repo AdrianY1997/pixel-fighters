@@ -1,3 +1,4 @@
+"use client";
 import InputGroup from "@/components/form/inputGroup";
 import Link from "next/link";
 
