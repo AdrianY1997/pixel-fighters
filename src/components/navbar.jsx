@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import checkUser from "@/services/database/checkUser";
+//import checkUser from "@/services/database/checkUser";
 
 export default async function Navbar() {
-  const { isLogged, isAdmin } = checkUser();
+  //const { isLogged, isAdmin } = checkUser();
   return (
     <div>
       <nav className=" shadow-sm bg-white fixed w-full">
