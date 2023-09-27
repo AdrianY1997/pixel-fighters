@@ -17,6 +17,13 @@ export async function POST(request) {
     },
   });
 
+  const dojomember = await prisma.dojoMember.create({
+    data: {
+      member_user: user.user_id,
+      member_dojo: dojo.dojo_id,
+    },
+  });
+
   const publication = await prisma.publication.create({
     data: {
       publication_calification: 0,
@@ -24,14 +31,7 @@ export async function POST(request) {
       publication_event: 0,
       publication_title: params.title,
       publication_dojo: dojo.dojo_id,
-      publication_member: user.user_id,
-    },
-  });
-
-  const dojomember = await prisma.dojoMember.create({
-    data: {
-      member_user: user.user_id,
-      member_dojo: dojo.dojo_id,
+      publication_member: dojomember.member_id,
     },
   });
 

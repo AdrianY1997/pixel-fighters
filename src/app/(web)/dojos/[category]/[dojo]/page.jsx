@@ -24,8 +24,6 @@ export default async function SelectedDojoPage({ params }) {
     },
   });
 
-  console.log(dojoData);
-
   return (
     <>
       <div className="p-4 w-full">

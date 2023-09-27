@@ -51,6 +51,7 @@ export default function NewDojo() {
         user: session.data.user.name,
       }),
     });
+    router.push("/dojos");
   }
 
   return (
