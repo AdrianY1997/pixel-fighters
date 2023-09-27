@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Dojo({ list }) {
@@ -7,9 +8,13 @@ export default function Dojo({ list }) {
       <div>
         {list ? (
           list.map((e, i) => (
-            <div className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded cursor-pointer m-1">
-              <h3>{e.member_dojo_id.dojo_category_id.category_name}</h3>
-            </div>
+            <Link
+              href={`/dojos/${e.member_dojo_id.dojo_category_id.category_name.toLowerCase()}`}
+            >
+              <div className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded cursor-pointer m-1">
+                <h3>{e.member_dojo_id.dojo_category_id.category_name}</h3>
+              </div>
+            </Link>
           ))
         ) : (
           <>No hay dojos</>
