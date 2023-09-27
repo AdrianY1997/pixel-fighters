@@ -14,6 +14,9 @@ export default async function ProfilePage() {
   }
 
   const userData = await prisma.user.findFirst({
+    where: {
+      user_name: session.user.name,
+    },
     include: {
       DojoMember: {
         include: {
@@ -26,7 +29,6 @@ export default async function ProfilePage() {
       },
     },
   });
-  // console.log(userData);
 
   return (
     <div className="flex flex-grow md:flex-row">

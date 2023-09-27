@@ -10,7 +10,6 @@ import { Fragment } from "react";
 
 export default async function CategoryPage({ params }) {
   const session = await getServerSession();
-  console.log(session);
   const categoryData = await prisma.category.findFirst({
     where: {
       category_id: params.category,
@@ -67,7 +66,7 @@ export default async function CategoryPage({ params }) {
         <div className="flex mt-8">
           {categoryData ? (
             <>
-              <div>
+              <div className="flex flex-wrap gap-4 gap-y-8">
                 {categoryData.Dojo.map((e, i) => {
                   const dojoData = e.DojoMember.map((e, i) => {
                     return {
@@ -77,7 +76,7 @@ export default async function CategoryPage({ params }) {
                   });
                   return (
                     <>
-                      <div className=" bg-white  rounded-md shadow-md">
+                      <div className=" bg-white  rounded-md shadow-md w-[49%]">
                         <div className="relative flex gap-4 px-4">
                           <div className="absolute top-0 left-4 -my-5 bg-black w-20 h-20"></div>
                           <div className="w-20"></div>
