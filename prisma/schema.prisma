@@ -46,7 +46,7 @@ model Publication {
   publication_title        String
   publication_content      String
   publication_calification Float
-  publication_datecreated  DateTime
+  publication_datecreated  DateTime?
   publication_event        Int
   publication_dojo         String
   publication_member_id    User      @relation(fields: [publication_member], references: [user_id])
