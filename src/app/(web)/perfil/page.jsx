@@ -13,7 +13,11 @@ export default async function ProfilePage() {
     redirect("/inicio");
   }
 
-  const userData = await prisma.user.findFirst();
+  const userData = await prisma.user.findFirst({
+    include: {
+      _count: true,
+    },
+  });
   console.log(userData);
 
   return (
