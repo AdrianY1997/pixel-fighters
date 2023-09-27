@@ -1,9 +1,9 @@
-import DashboardUsers from "@/components/dashboard/dashboardUsers"
+import DashboardUsers from "@/components/dashboard/dashboardUsers";
 
-export default function DashboardPage(){
-    return(
-        <>
-            <DashboardUsers/>
-        </>
-    )
+export default function DashboardPage() {
+  return (
+    <>
+      <DashboardUsers />
+    </>
+  );
 }
