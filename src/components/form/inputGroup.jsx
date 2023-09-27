@@ -1,10 +1,13 @@
-function typeText(name, onInputChangeHandler) {
+"use client";
+
+function typeText(name, placeholder, onInputChangeHandler) {
   return (
     <input
       className="bg-[whitesmoke] shadow-inner rounded-md px-2 py-1"
       type="text"
       name={name}
       onChange={(e) => onInputChangeHandler(e)}
+      placeholder={placeholder}
     />
   );
 }
@@ -39,9 +42,10 @@ export default function InputGroup({
   type,
   options,
   onInputChangeHandler,
+  placeholder,
 }) {
   const inputTypes = {
-    text: () => typeText(name, onInputChangeHandler),
+    text: () => typeText(name, placeholder, onInputChangeHandler),
     select: () => typeSelect({ options, name, onInputChangeHandler }),
   };
 
@@ -50,9 +54,11 @@ export default function InputGroup({
   return (
     <>
       <div className="flex flex-col">
-        <label htmlFor="user" className="text-slate-400">
-          {label[0].toUpperCase() + label.slice(1)}
-        </label>
+        {label && (
+          <label htmlFor="user" className="text-slate-400">
+            {label[0].toUpperCase() + label.slice(1)}
+          </label>
+        )}
         {input}
       </div>
     </>
