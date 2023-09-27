@@ -18,7 +18,7 @@ export default async function ProfilePage() {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="w-full md:w-1/4">
+      <div className="w-full md:w-1/5">
         {/* Contenedor de la primera columna (User y Dojo) */}
         <div className="sticky top-0">
           <div className="mb-4">
@@ -29,7 +29,7 @@ export default async function ProfilePage() {
           </div>
         </div>
       </div>
-      <div className="w-full md:w-3/4 p-4 overflow-y-auto">
+      <div className="w-full md:w-4/5 p-4 overflow-y-auto">
         {/* Contenedor de la segunda columna (Publicaciones) */}
         <Publicaciones />
       </div>
