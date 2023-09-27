@@ -13,13 +13,17 @@ export async function GET(request) {
 
   return Response.json(data);
 }
-
 export async function POST(request) {
-  const data = await request.json();
+  // const data = await prisma.user.findMany();
+  const datarec = await request.json()
+  const user = await prisma.user.create({data:{
+    user_email:datarec.user_email,
+    user_name:datarec.user_name,
+    user_password:datarec.user_password,
+    user_level:datarec.user_level,
+    user_role:"1",
+  }})
+  console.log(datarec);
 
-  const user = await prisma.user.create({
-    data: {},
-  });
-
-  return Response.json(user);
+  return Response.json({});
 }
