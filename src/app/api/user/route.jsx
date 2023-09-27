@@ -21,7 +21,7 @@ export async function POST(request) {
     user_name:datarec.user_name,
     user_password:datarec.user_password,
     user_level:datarec.user_level,
-    user_role:"1",
+    user_role:1,
   }})
   console.log(datarec);
 
