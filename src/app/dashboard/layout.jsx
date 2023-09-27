@@ -7,8 +7,7 @@ export default function DashboardLayout() {
       <html>
         <body className="flex bg-gray-100 min-h-screen">
             <LateralNav></LateralNav>
-            <Header user="Cristian" role="Administrador"></Header>
-            
+            <Header user="Cristian" role="Administrador"></Header>  
         </body>
       </html>
     </>
