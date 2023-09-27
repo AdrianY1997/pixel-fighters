@@ -2,9 +2,22 @@
 
 import InputGroup from "@/components/form/inputGroup";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function LoginPage() {
-  function onNewUserSubmitHandler() {}
+  const [formData, setFormData] = useState({});
+
+  function onInputChangeHandler(e) {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  function onNewUserSubmitHandler(e) {
+    e.preventDefault();
+    console.log(formData);
+  }
 
   return (
     <>
@@ -12,12 +25,30 @@ export default function LoginPage() {
         <form onSubmit={onNewUserSubmitHandler}>
           <p className="text-center mb-4">Accede a tu cuenta</p>
           <div className="flex flex-col gap-4 mb-4">
-            <InputGroup label={"usuario"} />
-            <InputGroup label={"nombre"} />
-            <InputGroup label={"contraseña"} />
-            <InputGroup label={"repetir contraseña"} />
             <InputGroup
+              onInputChangeHandler={onInputChangeHandler}
+              name={"user"}
+              label={"usuario"}
+            />
+            <InputGroup
+              name={"name"}
+              onInputChangeHandler={onInputChangeHandler}
+              label={"nombre"}
+            />
+            <InputGroup
+              name={"password"}
+              onInputChangeHandler={onInputChangeHandler}
+              label={"contraseña"}
+            />
+            <InputGroup
+              name={"password"}
+              onInputChangeHandler={onInputChangeHandler}
+              label={"repetir contraseña"}
+            />
+            <InputGroup
+              onInputChangeHandler={onInputChangeHandler}
               type={"select"}
+              name={"exp"}
               options={["kouhai", "minarai", "senpai"]}
               label={"nivel de experticia"}
             />
