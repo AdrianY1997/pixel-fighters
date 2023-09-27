@@ -2,7 +2,6 @@
 import InputGroup from "@/components/form/inputGroup";
 import { useState } from "react";
 import Link from "next/link";
-import { useState } from "react";
 
 export default function LoginPage() {
   const [data, setData] = useState({})
@@ -84,8 +83,7 @@ export default function LoginPage() {
             <InputGroup
               name={"user_level"}
               type={"select"}
-              name={"exp"}
-              options={["kouhai", "minarai", "senpai"]}
+              options={[{name:"kouhai",value:"kouhai"},{name:"minarai", value:"minarai"} ,{name:"senpai",value:"senpai"} ]}
               label={"nivel de experticia"}
               onInputChangeHandler={handleChange}
             />
