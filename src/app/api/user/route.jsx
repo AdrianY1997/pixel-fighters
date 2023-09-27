@@ -1,9 +1,17 @@
 import { prisma } from "@/services/database/client";
+import { NextRequest } from "next/server";
 
-export async function GET() {
-  const data = await prisma.user.findMany();
+export async function GET(request) {
+  const params = new NextRequest(request);
+  const name = params.nextUrl.searchParams.get("name");
 
-  return Response.json(data.length ? true : false);
+  const data = await prisma.user.findFirst({
+    where: {
+      user_name: name,
+    },
+  });
+
+  return Response.json(data);
 }
 export async function POST(request) {
   // const data = await prisma.user.findMany();

@@ -1,7 +1,7 @@
 "use client";
 
 import InputGroup from "@/components/form/inputGroup";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -18,7 +18,6 @@ export default function LoginPage() {
     e.preventDefault();
     await signIn("credentials", {
       ...formData,
-      redirect: "/perfil",
     });
   }
 
