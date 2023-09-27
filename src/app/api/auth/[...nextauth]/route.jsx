@@ -3,6 +3,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 const authOptions = {
+  secret: process.env.JWT_TOKEN,
   providers: [
     Credentials({
       id: "credentials",

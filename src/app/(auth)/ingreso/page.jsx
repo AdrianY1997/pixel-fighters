@@ -3,12 +3,11 @@
 import InputGroup from "@/components/form/inputGroup";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({});
-  const session = useSession();
-  console.log(session);
   function onInputChangeHandler(e) {
     setFormData({
       ...formData,
@@ -18,9 +17,9 @@ export default function LoginPage() {
 
   async function onFormSubmitHandler(e) {
     e.preventDefault();
-    const session = await signIn("credentials", {
+    await signIn("credentials", {
       ...formData,
-      redirect: false,
+      redirect: "/perfil",
     });
   }
 
