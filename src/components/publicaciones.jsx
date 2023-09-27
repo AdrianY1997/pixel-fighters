@@ -10,8 +10,10 @@ export default function Publicaciones({ list }) {
             <div className="bg-white px-4 rounded-lg shadow-md">
               <p className="text-xs text-gray-500 pb-0">Fecha del aporte</p>
               <div className="p-2">
-                <h2 className="text-xl font-bold text-blue-500 hover:underline cursor-pointer mb-2"></h2>
-                <p className="text-base text-gray-700">Inicio del texto</p>
+                <h2 className="text-xl font-bold text-blue-500 hover:underline cursor-pointer mb-2">
+                  Título del aporte
+                </h2>
+                <p className="text-base text-gray-700">Inicio del texto </p>
               </div>
             </div>
           );

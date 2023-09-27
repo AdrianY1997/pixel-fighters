@@ -29,8 +29,8 @@ export default async function ProfilePage() {
   // console.log(userData);
 
   return (
-    <div className="flex flex-col md:flex-row">
-      <div className="w-full md:w-1/5">
+    <div className="flex flex-grow md:flex-row">
+      <div className="w-1/5 mb:w-full">
         {/* Contenedor de la primera columna (User y Dojo) */}
         <div className="sticky top-0">
           <div className="mb-4">
@@ -41,10 +41,11 @@ export default async function ProfilePage() {
           </div>
         </div>
       </div>
-      <div className="w-full md:w-4/5 p-4 overflow-y-auto">
+      <div className="mb:w-full w-4/5 p-4 overflow-y-auto">
         {/* Contenedor de la segunda columna (Publicaciones) */}
         <Publicaciones list={userData.DojoMember} />
       </div>
     </div>
+
   );
 }
