@@ -9,5 +9,14 @@ export async function POST(request) {
     },
   });
 
+  //   await prisma.dojo.create({
+  //     data: {
+  //       dojo_name: params.title,
+  //       dojo,
+  //     },
+  //   });
+
+  console.log(user);
+
   return Response.json({});
 }
