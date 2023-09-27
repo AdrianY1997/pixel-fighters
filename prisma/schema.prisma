@@ -17,7 +17,7 @@ model User {
   user_password    String
   user_level       String
   user_role        Int
-  user_datecreated DateTime
+  user_datecreated DateTime?
   Comment          Comment[]
   DojoMember       DojoMember[]
   Publication      Publication[]
@@ -34,10 +34,11 @@ model Category {
 model Dojo {
   dojo_id          String        @id @default(uuid())
   dojo_name        String
+  dojo_description String
   dojo_category    String
   dojo_category_id Category      @relation(fields: [dojo_category], references: [category_id])
-  DojoMember       DojoMember[]
   Publication      Publication[]
+  DojoMember       DojoMember[]
 }
 
 model Publication {
