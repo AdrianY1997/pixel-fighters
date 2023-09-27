@@ -23,15 +23,32 @@ function typeSelect({ options, name, onInputChangeHandler }) {
         <option selected disabled value="">
           Seleccione una opción...
         </option>
-        {options &&
+        {options ? (
           options.map((e, i) => {
             return (
-              <option key={i} value={e}>
-                {e}
+              <option key={i} value={e.value}>
+                {e.name}
               </option>
             );
-          })}
+          })
+        ) : (
+          <></>
+        )}
       </select>
+    </>
+  );
+}
+
+function textareaType({ name, onInputChangeHandler }) {
+  return (
+    <>
+      <textarea
+        name={name}
+        cols="30"
+        rows="10"
+        onChange={onInputChangeHandler}
+        className="bg-[whitesmoke] shadow-inner rounded-md px-2 py-1"
+      ></textarea>
     </>
   );
 }
@@ -47,6 +64,7 @@ export default function InputGroup({
   const inputTypes = {
     text: () => typeText(name, placeholder, onInputChangeHandler),
     select: () => typeSelect({ options, name, onInputChangeHandler }),
+    textarea: () => textareaType({ name, onInputChangeHandler }),
   };
 
   const input = inputTypes[type ? type : "text"]();
