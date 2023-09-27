@@ -42,13 +42,6 @@ export default function LoginPage() {
         user_level: "",
       });
     }
-
-    // Aquí puedes realizar las acciones que desees con los datos del formulario
-    // Por ejemplo, puedes enviar los datos a un servidor, realizar validaciones, etc.
-
-    console.log("Formulario enviado con datos:", data);
-
-    // Restablece el estado del formulario después de enviarlo, si es necesario
   }
 
   const handleChange = (e) => {
