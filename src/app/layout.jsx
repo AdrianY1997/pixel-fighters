@@ -8,7 +8,7 @@ export default function RootLayout({ children }) {
     <>
       <html>
         <SessionProvider>
-          <body className="bg-[whitesmoke]">{children}</body>
+        <body className="flex bg-gray-100 min-h-screen">{children}</body>
         </SessionProvider>
       </html>
     </>
