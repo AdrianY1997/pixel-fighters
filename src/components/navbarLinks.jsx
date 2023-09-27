@@ -20,7 +20,7 @@ export default function NavbarLinks() {
         <>
           <Link
             className="cursor-pointer text-black hover:text-blue-600 px-4 py-2 rounded-md"
-            href={"#"}
+            href={"/dojos"}
           >
             dojos
           </Link>

@@ -43,9 +43,8 @@ export default async function ProfilePage() {
       </div>
       <div className="mb:w-full w-4/5 p-4 overflow-y-auto">
         {/* Contenedor de la segunda columna (Publicaciones) */}
-        <Publicaciones list={userData.DojoMember} />
+        <Publicaciones id={userData.user_id} list={userData.DojoMember} />
       </div>
     </div>
-
   );
 }
