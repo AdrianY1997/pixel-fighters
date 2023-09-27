@@ -1,23 +1,31 @@
-import { prisma } from "@/services/database/client";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+"use client";
 
-export default async function NewDojo() {
-  const session = await getServerSession();
+import { useSession } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-  if (!session) {
-    redirect("/dojos");
-  }
+export default function NewDojo() {
+  const session = useSession();
+  const router = useRouter();
 
-  const data = await prisma.user.findMany({
-    select: {
-      _count: true,
-    },
-  });
+  useEffect(async () => {
+    async function checkSession() {
+      if (session.status === "unauthenticated") {
+        router.push("/dojos");
+      }
+    }
+    checkSession();
+  }, [session]);
+
+  function onNewDojoSubmitHandler() {}
 
   return (
     <>
-      <div className="p-4 w-full"></div>
+      <div className="p-4 w-full">
+        <form onSubmit={onNewDojoSubmitHandler}>
+          <input type="hidden" name="member_id" />
+        </form>
+      </div>
     </>
   );
 }

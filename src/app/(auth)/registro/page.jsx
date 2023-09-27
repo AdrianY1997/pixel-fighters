@@ -1,12 +1,15 @@
 "use client";
+
 import InputGroup from "@/components/form/inputGroup";
 import Link from "next/link";
 
 export default function LoginPage() {
+  function onNewUserSubmitHandler() {}
+
   return (
     <>
       <div className="w-[500px] shadow-md bg-white rounded-md px-20 py-16 mx-auto">
-        <form>
+        <form onSubmit={onNewUserSubmitHandler}>
           <p className="text-center mb-4">Accede a tu cuenta</p>
           <div className="flex flex-col gap-4 mb-4">
             <InputGroup label={"usuario"} />
