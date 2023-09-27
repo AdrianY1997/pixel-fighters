@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faPowerOff, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState, use, useRef } from "react";
 
 export default function NavbarLinks() {
@@ -24,23 +24,15 @@ export default function NavbarLinks() {
           >
             dojos
           </Link>
-          <div className="relative">
-            <button
-              className="cursor-pointer bg-blue-500 text-white px-2.5 py-1 rounded-full"
-              onClick={onUserIconHandler}
-            >
-              <FontAwesomeIcon icon={faUser} />
-            </button>
-            <div
-              ref={userMenuRef}
-              className={`absolute flex !hidden top-full m-1 right-0 w-[100px] bg-white flex-col`}
-            >
-              <Link href={"/perfil"}>Mi perfil</Link>
-              <button onClick={() => signOut({ redirect: "/inicio" })}>
-                Cerrar Sesión
-              </button>
-            </div>
-          </div>
+          <Link
+            href={"/perfil"}
+            className="cursor-pointer bg-blue-500 text-white px-2.5 py-1 rounded-full"
+          >
+            <FontAwesomeIcon icon={faUser} />
+          </Link>
+          <button onClick={() => signOut({ redirect: "/inicio" })}>
+            <FontAwesomeIcon className="text-red-800" icon={faPowerOff} />
+          </button>
         </>
       ) : (
         <>
