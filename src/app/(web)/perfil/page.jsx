@@ -15,10 +15,18 @@ export default async function ProfilePage() {
 
   const userData = await prisma.user.findFirst({
     include: {
-      _count: true,
+      DojoMember: {
+        include: {
+          member_dojo_id: {
+            include: {
+              dojo_category_id: true,
+            },
+          },
+        },
+      },
     },
   });
-  console.log(userData);
+  // console.log(userData);
 
   return (
     <div className="flex flex-col md:flex-row">
@@ -29,13 +37,13 @@ export default async function ProfilePage() {
             <User data={userData} />
           </div>
           <div className="mb-4">
-            <Dojo />
+            <Dojo list={userData.DojoMember} />
           </div>
         </div>
       </div>
       <div className="w-full md:w-4/5 p-4 overflow-y-auto">
         {/* Contenedor de la segunda columna (Publicaciones) */}
-        <Publicaciones />
+        <Publicaciones list={userData.DojoMember} />
       </div>
     </div>
   );

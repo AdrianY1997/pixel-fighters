@@ -32,12 +32,12 @@ model Category {
 }
 
 model Dojo {
-  dojo_id             String        @id @default(uuid())
-  dojo_name           String
-  dojo_category       Category      @relation(fields: [categoryCategory_id], references: [category_id])
-  categoryCategory_id String
-  DojoMember          DojoMember[]
-  Publication         Publication[]
+  dojo_id          String        @id @default(uuid())
+  dojo_name        String
+  dojo_category    String
+  dojo_category_id Category      @relation(fields: [dojo_category], references: [category_id])
+  DojoMember       DojoMember[]
+  Publication      Publication[]
 }
 
 model Publication {
@@ -65,9 +65,9 @@ model Comment {
 }
 
 model DojoMember {
-  member_id   String @id @default(uuid())
-  member_user User   @relation(fields: [userUser_id], references: [user_id])
-  member_dojo Dojo   @relation(fields: [dojoDojo_id], references: [dojo_id])
-  userUser_id String
-  dojoDojo_id String
+  member_id      String @id @default(uuid())
+  member_user    String
+  member_dojo    String
+  member_user_id User   @relation(fields: [member_user], references: [user_id])
+  member_dojo_id Dojo   @relation(fields: [member_dojo], references: [dojo_id])
 }
