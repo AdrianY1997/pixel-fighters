@@ -2,9 +2,7 @@ import React from "react";
 
 
 export default function Header({user,role}) {
-    return (
-        <div className="flex-grow text-gray-800">
-            
+    return ( 
             <header className="flex items-center h-20 pr-6 sm:pr-10 bg-white">
             
                 <div className="flex flex-shrink-0 items-center ml-auto">
@@ -37,6 +35,5 @@ export default function Header({user,role}) {
                     </div>
                 </div>
             </header>
-        </div>
     );
 }
