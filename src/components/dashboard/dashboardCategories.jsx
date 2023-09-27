@@ -24,9 +24,10 @@ export default function DashboardCategories(){
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <CategoryTableRow
+                                                    <CategoryTableRow 
                                                         name="Programacion"
-                                                        description="Para que te canses"
+                                                        description="no se que hacer para que el div, no se vuelva mas ancho y me genere scroll, solo necesitamos que el texto se baje automaticamente a otro renglon, auilio, auxilio, auxilio.
+                                                         "
                                                     />
                                                     
                                                 </tbody>
