@@ -1,6 +1,6 @@
 import React from "react";
  
-export default function CardItem({modulo, svg, number,text}){
+export default function CardItem({modulo, svg, number}){
     return(
         
         <div className="flex items-center p-8 bg-white shadow rounded-lg">

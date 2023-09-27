@@ -3,6 +3,7 @@ import React from "react";
 export default function Chart({name,chart}){
     return(
         <>
+        
         <div className="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
             <div className="px-6 py-5 font-semibold border-b border-gray-100">{name}</div>
             <div className="p-4 flex-grow">
