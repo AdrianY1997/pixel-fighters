@@ -1,15 +1,14 @@
 "use client";
 
 import InputGroup from "@/components/form/inputGroup";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({});
-
-  const router = useRouter();
-
+  const session = useSession();
+  console.log(session);
   function onInputChangeHandler(e) {
     setFormData({
       ...formData,
@@ -19,20 +18,10 @@ export default function LoginPage() {
 
   async function onFormSubmitHandler(e) {
     e.preventDefault();
-    const response = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: [["Content-Type", "application/json"]],
-      body: JSON.stringify({
-        email: formData.email,
-        password: formData.password,
-      }),
+    const session = await signIn("credentials", {
+      ...formData,
+      redirect: false,
     });
-
-    if (response.status !== 200) {
-      return;
-    }
-
-    router.push("/home");
   }
 
   return (
