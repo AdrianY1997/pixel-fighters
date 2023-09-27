@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import NavbarLinks from "./navbarLinks";
 
-export default function Navbar() {
+export default async function Navbar() {
   return (
     <div>
       <nav className=" shadow-sm bg-white fixed w-full">
