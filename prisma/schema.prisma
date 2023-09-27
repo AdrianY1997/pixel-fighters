@@ -47,21 +47,21 @@ model Publication {
   publication_calification Float
   publication_datecreated  DateTime
   publication_event        Int
-  publication_dojo         Dojo      @relation(fields: [dojoDojo_id], references: [dojo_id])
-  publication_member       User      @relation(fields: [userUser_id], references: [user_id])
+  publication_dojo         String
+  publication_member_id    User      @relation(fields: [publication_member], references: [user_id])
   Comment                  Comment[]
-  dojoDojo_id              String
-  userUser_id              String
+  publication_dojo_id      Dojo      @relation(fields: [publication_dojo], references: [dojo_id])
+  publication_member       String
 }
 
 model Comment {
-  comment_id                String      @id @default(uuid())
-  comment_member            User        @relation(fields: [userUser_id], references: [user_id])
-  comment_publication       Publication @relation(fields: [publicationPublication_id], references: [publication_id])
-  comment_datecreated       DateTime
-  comment_description       String
-  userUser_id               String
-  publicationPublication_id String
+  comment_id          String      @id @default(uuid())
+  comment_member      String
+  comment_publication String
+  comment_datecreated DateTime
+  comment_description String
+  member_id           User        @relation(fields: [comment_member], references: [user_id])
+  publication_id      Publication @relation(fields: [comment_publication], references: [publication_id])
 }
 
 model DojoMember {
