@@ -6,4 +6,12 @@ export async function GET() {
   return Response.json(data.length ? true : false);
 }
 
-export async function POST(request) {}
+export async function POST(request) {
+  const data = await request.json();
+
+  const user = await prisma.user.create({
+    data: {},
+  });
+
+  return Response.json(user);
+}
