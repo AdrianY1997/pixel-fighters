@@ -13,7 +13,7 @@ function typeText(name, placeholder, onInputChangeHandler, onBlurInput) {
   );
 }
 
-function typePassword(name, placeholder, onInputChangeHandler, onBlurInput) {
+function typePassword(name, placeholder, onInputChangeHandler, onBlurInput, onFocus) {
   return (
     <input
       className="bg-[whitesmoke] shadow-inner rounded-md px-2 py-1"
@@ -22,6 +22,7 @@ function typePassword(name, placeholder, onInputChangeHandler, onBlurInput) {
       onChange={(e) => onInputChangeHandler(e)}
       onBlur={onBlurInput}
       placeholder={placeholder}
+      onFocus={onFocus}
     />
   );
 }
@@ -73,13 +74,15 @@ export default function InputGroup({
   label,
   type,
   options,
+  onFocus, 
+  onFocusOut,
   onInputChangeHandler,
   placeholder,
   onBlurInput
 }) {
   const inputTypes = {
     text: () => typeText(name, placeholder, onInputChangeHandler, onBlurInput),
-    password: () => typePassword(name, placeholder, onInputChangeHandler, onBlurInput),
+    password: () => typePassword(name, placeholder, onInputChangeHandler, onBlurInput, onFocus, onFocusOut),
     select: () => typeSelect({ options, name, onInputChangeHandler }),
     textarea: () => textareaType({ name, onInputChangeHandler, onBlurInput }),
   };
