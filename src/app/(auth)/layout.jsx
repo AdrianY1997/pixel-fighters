@@ -33,10 +33,12 @@ export default function AuthLayout({ children }) {
         <></>
       ) : (
         <>
-          <header>
-            <Navbar />
-          </header>
-          <main className="bg-[whitesmoke]">{children}</main>
+          <div>
+            <header>
+              <Navbar />
+            </header>
+          <main className="bg-[whitesmoke] mt-14 mb-4">{children}</main>
+          </div>
           <footer className="bg-white w-full shadow dark:bg-gray-900">
             <Footer />
           </footer>

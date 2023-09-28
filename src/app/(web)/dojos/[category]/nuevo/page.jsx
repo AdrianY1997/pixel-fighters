@@ -1,13 +1,14 @@
 "use client";
-
 import InputGroup from "@/components/form/inputGroup";
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Toast } from "@/components/providers/toastProvider";
 
 export default function NewDojo() {
   const [formData, setFormData] = useState({});
   const [categories, setCategories] = useState([]);
+  const [errors, setErrors] = useState({})
 
   const session = useSession();
   const router = useRouter();
@@ -35,6 +36,10 @@ export default function NewDojo() {
     getCategories();
   }, [session]);
 
+  useEffect(() => {
+    document.querySelector("input[name='title']").focus();
+  }, []);
+
   function onInputChangeHandler(e) {
     setFormData({
       ...formData,
@@ -44,6 +49,12 @@ export default function NewDojo() {
 
   async function onNewDojoSubmitHandler(e) {
     e.preventDefault();
+
+    // Si existen errores no haga el post
+    if (Object.keys(errors).length > 0) {
+      Toast.warning("Por favor, corrige los errores antes de enviar el formulario");
+      return;
+    }
     const response = await fetch("/api/dojo", {
       method: "POST",
       body: JSON.stringify({
@@ -53,6 +64,32 @@ export default function NewDojo() {
     });
     router.push("/dojos");
   }
+
+  //construccion de validaciones
+  const validateText = (fieldName, value) => {
+
+    const errorsCopy = { ...errors };
+    const regexText = /^[A-Za-z\s]+$/;
+    if (!regexText.test(value)) {
+      errorsCopy[fieldName] = `El ${fieldName} solo puede contener letras y espacios en blanco`;
+    } else {
+      delete errorsCopy[fieldName];
+    }
+
+
+    setErrors(errorsCopy);
+  };
+
+  //devuelve los errores 
+  const getError = (fieldName) => {
+    return errors[fieldName] || " ";
+  };
+
+  //pendiente a cambios en input
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    validateText(name, value);
+  };
 
   return (
     <>
@@ -65,12 +102,20 @@ export default function NewDojo() {
             name={"title"}
             label={"Titulo"}
             onInputChangeHandler={onInputChangeHandler}
+            onBlurInput={handleBlur}
           />
+          {getError("title") && (
+            <p className="text-red-500">{getError("title")}</p>
+          )}
           <InputGroup
             name={"description"}
             label={"Descripción corta"}
             onInputChangeHandler={onInputChangeHandler}
+            onBlurInput={handleBlur}
           />
+          {getError("description") && (
+            <p className="text-red-500">{getError("description")}</p>
+          )}
           <InputGroup
             name={"category"}
             label={"categoría"}
@@ -78,11 +123,13 @@ export default function NewDojo() {
             type={"select"}
             options={categories}
           />
+            <p className="text-red-500">Campo obligatorio</p>
           <InputGroup
             name={"content"}
             label={"Contenido"}
             type={"textarea"}
             onInputChangeHandler={onInputChangeHandler}
+            onBlurInput={handleBlur}
           />
           <button type="submit">enviar</button>
         </form>
