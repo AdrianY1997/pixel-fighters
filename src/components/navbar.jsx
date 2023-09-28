@@ -18,7 +18,7 @@ export default function Navbar() {
                   </h1>
                 </Link>
               </div>
-              <div className="hidden md:block">
+              <div>
                 <NavbarLinks />
               </div>
             </div>

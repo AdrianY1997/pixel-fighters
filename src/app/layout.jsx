@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
     <>
       <html>
         <SessionProvider>
-          <body className="flex bg-gray-100 min-h-screen">
+          <body className="bg-gray-100 min-h-[100vh] relative flex flex-col justify-between">
             {children}
             <ToastProvider />
           </body>

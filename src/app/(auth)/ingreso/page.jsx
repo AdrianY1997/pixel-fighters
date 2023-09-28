@@ -40,7 +40,7 @@ export default function LoginPage() {
       if (error) {
         return Toast.warning("credenciales erroneas")
       }
-      Toast.success("Inicio de seccion correcto")
+      Toast.success("Inicio de sesión correcto")
     }
   }
 
@@ -59,6 +59,7 @@ export default function LoginPage() {
             <InputGroup
               name="password"
               label={"contraseña"}
+              type={"password"}
               onInputChangeHandler={onInputChangeHandler}
             />
             {errors.password && (

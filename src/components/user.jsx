@@ -22,7 +22,7 @@ export default function User({ data }) {
         </div>
       </div>
       <div className="mt-4">
-        <h3 className="text-gray-700 text-lg font-medium">{data.user_email}</h3>
+        <h3 className="text-gray-700 text-lg font-medium overflow-hidden text-ellipsis" title={data.user_email}>{data.user_email}</h3>
         {/* Agrega aquí los temas de interés si es necesario */}
       </div>
     </div>
