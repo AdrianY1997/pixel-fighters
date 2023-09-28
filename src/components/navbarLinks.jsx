@@ -3,16 +3,27 @@
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPowerOff, faUser } from "@fortawesome/free-solid-svg-icons";
-import { useState, use, useRef } from "react";
+import {
+  faDashboard,
+  faPowerOff,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { useState, use, useRef, useEffect } from "react";
 
 export default function NavbarLinks() {
   const { data } = useSession();
-  const userMenuRef = useRef(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  function onUserIconHandler() {
-    userMenuRef.current.classList.toggle("!hidden");
-  }
+  useEffect(() => {
+    async function checkAdmin() {
+      if (!data) return;
+      const response = await fetch("/api/user?name=" + data.user.name);
+      const userData = await response.json();
+      setIsAdmin(userData.user_role === 2);
+    }
+
+    checkAdmin();
+  });
 
   return (
     <div className=" flex items-baseline justify-end space-x-4">
@@ -24,12 +35,21 @@ export default function NavbarLinks() {
           >
             dojos
           </Link>
-          <Link
-            href={"/perfil"}
-            className="cursor-pointer bg-blue-500 text-white px-2.5 py-1 rounded-full"
-          >
-            <FontAwesomeIcon icon={faUser} />
-          </Link>
+          {isAdmin ? (
+            <Link
+              href={"/dashboard"}
+              className="cursor-pointer bg-blue-500 text-white px-2.5 py-1 rounded-full"
+            >
+              <FontAwesomeIcon icon={faDashboard} />
+            </Link>
+          ) : (
+            <Link
+              href={"/perfil"}
+              className="cursor-pointer bg-blue-500 text-white px-2.5 py-1 rounded-full"
+            >
+              <FontAwesomeIcon icon={faUser} />
+            </Link>
+          )}
           <button onClick={() => signOut({ redirect: "/inicio" })}>
             <FontAwesomeIcon className="text-red-800" icon={faPowerOff} />
           </button>
