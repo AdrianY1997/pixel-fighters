@@ -7,6 +7,20 @@ import { useState } from "react";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({});
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.email) {
+      newErrors.email = "El correo es obligatorio.";
+    }
+    if (!formData.password) {
+      newErrors.password = "La contraseña es obligatoria.";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   function onInputChangeHandler(e) {
     setFormData({
       ...formData,
@@ -16,9 +30,15 @@ export default function LoginPage() {
 
   async function onFormSubmitHandler(e) {
     e.preventDefault();
-    await signIn("credentials", {
-      ...formData,
-    });
+    if (validateForm()) {
+      const { error } = await signIn("credentials", {
+        ...formData,
+        redirect:false
+      });
+      if (error){
+        console.log("hay error");
+      }
+    }
   }
 
   return (
@@ -32,11 +52,17 @@ export default function LoginPage() {
               label={"email"}
               onInputChangeHandler={onInputChangeHandler}
             />
+            {errors.email && (
+              <p className="text-red-500">{errors.email}</p>
+            )}
             <InputGroup
               name="password"
               label={"contraseña"}
               onInputChangeHandler={onInputChangeHandler}
             />
+            {errors.password && (
+              <p className="text-red-500">{errors.password}</p>
+            )}
           </div>
           <div>
             <button
