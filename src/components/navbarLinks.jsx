@@ -81,9 +81,10 @@ export default function NavbarLinks() {
           </Link>
           <Link
             href="/ingreso"
-            className="cursor-pointer bg-blue-500 text-white px-4 py-1 rounded-md"
+            className="cursor-pointer bg-blue-500 text-white px-4 py-1 rounded-md flex flex-row items-center"
           >
-            <FontAwesomeIcon icon={faRightToBracket} />
+            <p>Acceder</p>
+            <FontAwesomeIcon icon={faRightToBracket} className="px-2" />
           </Link>
         </>
       )}
