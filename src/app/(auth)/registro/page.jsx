@@ -65,11 +65,11 @@ export default function LoginPage() {
             {errors.user_name && (
               <p className="text-red-500">{errors.user_name}</p>
             )}
-            <InputGroup name={"user_password"} label={"contraseña"} onInputChangeHandler={handleChange}/>
+            <InputGroup name={"user_password"} type={"password"} label={"contraseña"} onInputChangeHandler={handleChange}/>
             {errors.user_password && (
               <p className="text-red-500">{errors.user_password}</p>
             )}
-            <InputGroup label={"repetir contraseña"} name={"user_password_repeat"} onInputChangeHandler={handleChange}/>
+            <InputGroup label={"repetir contraseña"} type={"password"} name={"user_password_repeat"} onInputChangeHandler={handleChange}/>
             {errors.user_password_repeat && (
               <p className="text-red-500">{errors.user_password_repeat}</p>
             )}
