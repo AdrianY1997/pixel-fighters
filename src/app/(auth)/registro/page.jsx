@@ -4,11 +4,15 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight, faDotCircle, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
+import { Toast } from "@/components/providers/toastProvider";
 
 export default function LoginPage() {
   const [data, setData] = useState({})
   const [errors, setErrors] = useState({});
   const passwordPatterRed = useRef(null)
+
+  const router = useRouter()
 
   const validateForm = () => {
     const regexp = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{8,16}$/);
@@ -39,15 +43,14 @@ export default function LoginPage() {
         method:"POST",
         body:JSON.stringify(data)
       }) 
-      console.log("Formulario enviado con datos:", data);
 
       // Restablece el estado del formulario después de enviarlo, si es necesario
-      setData({
-        user_email: "",
-        user_name: "",
-        user_password: "",
-        user_level: "",
-      });
+      setData({});
+
+
+      Toast.success("Registro completo")
+
+      router.push("/ingreso")
     }
   }
 
