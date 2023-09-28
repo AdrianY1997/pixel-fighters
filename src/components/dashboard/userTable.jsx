@@ -6,7 +6,7 @@ export default function UserTable({ userName, email }) {
       <div className="flex px-2 py-1">
         <div>
           <img
-            src="../assets/img/team-2.jpg"
+            src="/img/image.png"
             className="inline-flex items-center justify-center mr-4 text-sm text-white transition-all duration-200 ease-in-out h-9 w-9 rounded-xl"
             alt="user1"
           />

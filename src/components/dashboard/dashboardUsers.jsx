@@ -3,7 +3,9 @@ import ColumnTitleTable from "./columnTitleTable";
 import UserTableRow from "./userTableRow";
 
 export default async function DashboardUsers() {
-  const users = await prisma.return(
+  const users = await prisma.user.findMany();
+
+  return (
     <>
       <div className="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
         <div className="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
@@ -19,23 +21,33 @@ export default async function DashboardUsers() {
                       <table className="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
                         <thead className="align-bottom">
                           <tr>
-                            <ColumnTitleTable columnName="User" />
+                            <ColumnTitleTable columnName="Nombre" />
+                            <ColumnTitleTable columnName="Correo" />
                             <ColumnTitleTable columnName="Experience" />
                             <ColumnTitleTable columnName="Role" />
-                            <ColumnTitleTable columnName="Status" />
-                            <ColumnTitleTable columnName="Last Online" />
                             <ColumnTitleTable />
                           </tr>
                         </thead>
                         <tbody>
-                          <UserTableRow
-                            userName="Cristian"
-                            email="cf.giron04@gmail.com"
-                            experience="Sensei"
-                            role="Administrador"
-                            status="Online"
-                            date="2023-09-28 8:00"
-                          />
+                          {users ? (
+                            users.map((e) => {
+                              return (
+                                <UserTableRow
+                                  userName={e.user_name}
+                                  email={""}
+                                  experience={e.user_email}
+                                  role={e.user_level}
+                                  status={
+                                    e.user_role == 1
+                                      ? "Usuario"
+                                      : "Administrador"
+                                  }
+                                />
+                              );
+                            })
+                          ) : (
+                            <></>
+                          )}
                         </tbody>
                       </table>
                     </div>
