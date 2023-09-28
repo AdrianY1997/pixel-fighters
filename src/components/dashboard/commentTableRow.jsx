@@ -1,18 +1,16 @@
 import React from "react";
 import UserTable from "./userTable";
 import Actions from "./userTable/actions";
-import Score from "./score";
 import LastOnline from "./userTable/lastOnline";
-import Status from "./userTable/status";
+import Experience from "./userTable/experience";
 
-export default function DojoTableRow({title, score, userName, date, status}){
+export default function CommentTableRow({title, userName, date, description}){
     return(
         <tr>
-            <UserTable userName={title}/>
-            <Score score={score}/>
             <UserTable userName={userName}/>
+            <UserTable userName={title}/>
             <LastOnline date={date}></LastOnline>
-            <Status status={status} />
+            <Experience experience={description}></Experience>
             <Actions></Actions>
             
         </tr>
