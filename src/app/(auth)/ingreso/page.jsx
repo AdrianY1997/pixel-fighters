@@ -38,8 +38,9 @@ export default function LoginPage() {
         redirect: false,
       });
       if (error) {
-        console.log("hay error");
+        return Toast.warning("credenciales erroneas")
       }
+      Toast.success("Inicio de seccion correcto")
     }
   }
 
