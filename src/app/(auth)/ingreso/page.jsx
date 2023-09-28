@@ -7,8 +7,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function LoginPage() {
-  Toast.success("sdasd");
-
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
 
@@ -33,12 +31,13 @@ export default function LoginPage() {
 
   async function onFormSubmitHandler(e) {
     e.preventDefault();
+
     if (validateForm()) {
       const { error } = await signIn("credentials", {
         ...formData,
-        redirect:false
+        redirect: false,
       });
-      if (error){
+      if (error) {
         console.log("hay error");
       }
     }
@@ -55,9 +54,7 @@ export default function LoginPage() {
               label={"email"}
               onInputChangeHandler={onInputChangeHandler}
             />
-            {errors.email && (
-              <p className="text-red-500">{errors.email}</p>
-            )}
+            {errors.email && <p className="text-red-500">{errors.email}</p>}
             <InputGroup
               name="password"
               label={"contraseña"}

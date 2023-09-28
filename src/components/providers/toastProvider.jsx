@@ -33,7 +33,9 @@ export function ToastProvider() {
 
   return (
     <>
-      <ToastComponent toastList={toasts} />
+      <div className="toast-container fixed bottom-0 right-0 m-4 w-[300px] flex flex-col gap-2">
+        <ToastComponent toastList={toasts} />
+      </div>
     </>
   );
 }

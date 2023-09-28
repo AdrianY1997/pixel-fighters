@@ -49,7 +49,7 @@ const ToastElement = ({ color, icon, header, children }) => {
 
 export default function ToastComponent({ toastList }) {
   return (
-    <div className="toast-container fixed bottom-0 right-0 m-4 w-[300px] flex flex-col gap-2">
+    <>
       {toastList &&
         toastList.map((toast, i) => {
           const toastConfig = {
@@ -77,6 +77,6 @@ export default function ToastComponent({ toastList }) {
             </ToastElement>
           );
         })}
-    </div>
+    </>
   );
 }
