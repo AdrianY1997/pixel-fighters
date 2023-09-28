@@ -3,6 +3,7 @@ import InputGroup from "@/components/form/inputGroup";
 import { useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Toast } from "@/components/providers/toastProvider";
 
 export default function NewDojo() {
   const [formData, setFormData] = useState({});
@@ -43,32 +44,18 @@ export default function NewDojo() {
   }
 
   async function onNewDojoSubmitHandler(e) {
-    if (empresa.sedes.length === 0) {
-      swal("Error", "Debes ingresar al menos una sede", "error");
-      return;
-  }
-
-  // Verificar que todos los campos de las sedes estén completos
-  for (const sede of empresa.sedes) {
-      if (!sede.Dic_S || !sede.Sec_V) {
-          swal("Error", "Todos los campos de las sedes deben estar completos", "error");
-          return;
-      }
-
-      for (const encargado of sede.encargados) {
-          if (!encargado.N_En || !encargado.tel1) {
-              swal("Error", "Todos los campos de los encargados deben estar completos", "error");
-              return;
-          }
-      }
-  }
-
-  // Si existen errores no haga el post
-  if (Object.keys(errors).length > 0) {
-      swal("Error", "Por favor, corrige los errores antes de enviar el formulario", "error");
-      return;
-  }
     e.preventDefault();
+
+    if (categories === null) {
+      Toast.warning("selecciona una categoria")
+      return;
+    }
+
+    // Si existen errores no haga el post
+    if (Object.keys(errors).length > 0) {
+      Toast.warning("Por favor, corrige los errores antes de enviar el formulario");
+      return;
+    }
     const response = await fetch("/api/dojo", {
       method: "POST",
       body: JSON.stringify({
@@ -78,6 +65,25 @@ export default function NewDojo() {
     });
     router.push("/dojos");
   }
+
+  //validamos la catgoria
+  const validateCategory = (fieldName, value) => {
+
+    const errorsCopy = { ...errors };
+    if (!value) {
+      errorsCopy[fieldName] = `La categoría es obligatoria`;
+    } else {
+      delete errorsCopy[fieldName];
+    }
+  
+  
+    setErrors(errorsCopy);
+  };
+
+  //devuelve error de la categoria
+  const isCategoryValid = (category) => {
+    return categories.find((e) => e.value === category) !== undefined;
+  };
 
   //construccion de validaciones
   const validateText = (fieldName, value) => {
@@ -104,6 +110,10 @@ export default function NewDojo() {
     const { name, value } = e.target;
     validateText(name, value);
   };
+  const handleBlurCategory= (e) => {
+    const { name, value } = e.target;
+    validateCategory(name, value);
+  }
 
   return (
     <>
@@ -134,9 +144,13 @@ export default function NewDojo() {
             name={"category"}
             label={"categoría"}
             onInputChangeHandler={onInputChangeHandler}
+            onBlurInput={handleBlurCategory}
             type={"select"}
             options={categories}
           />
+          {isCategoryValid("category")  && (
+            <p className="text-red-500">{isCategoryValid("category")}</p>
+          )}
           <InputGroup
             name={"content"}
             label={"Contenido"}
