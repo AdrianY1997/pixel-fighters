@@ -10,9 +10,11 @@ export default function RootLayout({ children }) {
     <>
       <html>
         <SessionProvider>
-          <body className="flex bg-gray-100 min-h-screen">{children}</body>
+          <body className="flex bg-gray-100 min-h-screen">
+            {children}
+            <ToastProvider />
+          </body>
         </SessionProvider>
-        <ToastProvider />
       </html>
     </>
   );
