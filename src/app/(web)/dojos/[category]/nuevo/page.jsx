@@ -8,7 +8,7 @@ import { Toast } from "@/components/providers/toastProvider";
 export default function NewDojo() {
   const [formData, setFormData] = useState({});
   const [categories, setCategories] = useState([]);
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
 
   const session = useSession();
   const router = useRouter();
@@ -51,10 +51,12 @@ export default function NewDojo() {
     e.preventDefault();
 
     // Si existen errores no haga el post
-    if (Object.keys(errors).length > 0) {
-      Toast.warning("Por favor, corrige los errores antes de enviar el formulario");
-      return;
-    }
+    // if (Object.keys(errors).length > 0) {
+    //   Toast.warning(
+    //     "Por favor, corrige los errores antes de enviar el formulario"
+    //   );
+    //   return;
+    // }
     const response = await fetch("/api/dojo", {
       method: "POST",
       body: JSON.stringify({
@@ -67,20 +69,20 @@ export default function NewDojo() {
 
   //construccion de validaciones
   const validateText = (fieldName, value) => {
-
     const errorsCopy = { ...errors };
     const regexText = /^[A-Za-z\s]+$/;
     if (!regexText.test(value)) {
-      errorsCopy[fieldName] = `El ${fieldName} solo puede contener letras y espacios en blanco`;
+      errorsCopy[
+        fieldName
+      ] = `El ${fieldName} solo puede contener letras y espacios en blanco`;
     } else {
       delete errorsCopy[fieldName];
     }
 
-
     setErrors(errorsCopy);
   };
 
-  //devuelve los errores 
+  //devuelve los errores
   const getError = (fieldName) => {
     return errors[fieldName] || " ";
   };
@@ -111,11 +113,7 @@ export default function NewDojo() {
             name={"description"}
             label={"Descripción corta"}
             onInputChangeHandler={onInputChangeHandler}
-            onBlurInput={handleBlur}
           />
-          {getError("description") && (
-            <p className="text-red-500">{getError("description")}</p>
-          )}
           <InputGroup
             name={"category"}
             label={"categoría"}
@@ -123,7 +121,7 @@ export default function NewDojo() {
             type={"select"}
             options={categories}
           />
-            <p className="text-red-500">Campo obligatorio</p>
+          <p className="text-red-500">Campo obligatorio</p>
           <InputGroup
             name={"content"}
             label={"Contenido"}

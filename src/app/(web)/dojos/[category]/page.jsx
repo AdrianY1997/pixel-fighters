@@ -33,7 +33,7 @@ export default async function CategoryPage({ params }) {
         <div>
           <div className="flex gap-4 relative -z-0">
             <div className="bg-black w-20 h-20"></div>
-            <div className="relative">
+            <div className="relative w-full">
               <h1 className="font-bold text-xl">
                 {categoryData.category_name[0].toUpperCase() +
                   categoryData.category_name.slice(1)}
@@ -63,10 +63,10 @@ export default async function CategoryPage({ params }) {
             <FontAwesomeIcon width={15} icon={faSearch} />
           </div>
         </div>
-        <div className="flex mt-8">
+        <div className="flex mt-8 w-full">
           {categoryData ? (
             <>
-              <div className="flex flex-wrap gap-4 gap-y-8">
+              <div className="flex flex-wrap gap-4 gap-y-8 w-[49%]">
                 {categoryData.Dojo.map((e, i) => {
                   const dojoData = e.DojoMember.map((e, i) => {
                     return {
@@ -76,7 +76,7 @@ export default async function CategoryPage({ params }) {
                   });
                   return (
                     <>
-                      <div className=" bg-white  rounded-md shadow-md w-[49%]">
+                      <div className=" bg-white  rounded-md shadow-md w-full">
                         <div className="relative flex gap-4 px-4">
                           <div className="absolute top-0 left-4 -my-5 bg-black w-20 h-20"></div>
                           <div className="w-20"></div>
