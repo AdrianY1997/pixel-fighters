@@ -3,8 +3,11 @@
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
+import { Toast } from "../providers/toastProvider";
+import { useRouter } from "next/navigation";
 
 export default function Header({ user, role }) {
+  const router = useRouter();
   return (
     <header className="flex items-center h-20 pr-6 sm:pr-10 bg-white">
       <div className="flex flex-shrink-0 items-center ml-auto">
@@ -55,7 +58,17 @@ export default function Header({ user, role }) {
             </svg>
           </button> */}
           <button
-            onClick={() => signOut()}
+            onClick={async () => {
+              const signout = await signOut({ redirect: false });
+              if (signout.error) {
+                return Toast.warning(
+                  "Ocurrió un error al intentar cerrar sesión."
+                );
+              }
+
+              Toast.success("Haz cerrado sesión correctamente");
+              router.push("/inicio");
+            }}
             className="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full"
           >
             <span className="sr-only">Log out</span>
