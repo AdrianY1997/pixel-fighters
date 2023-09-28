@@ -1,12 +1,13 @@
 "use client";
 
-function typeText(name, placeholder, onInputChangeHandler) {
+function typeText(name, placeholder, onInputChangeHandler, onBlurInput) {
   return (
     <input
       className="bg-[whitesmoke] shadow-inner rounded-md px-2 py-1"
       type="text"
       name={name}
       onChange={(e) => onInputChangeHandler(e)}
+      onBlur={onBlurInput}
       placeholder={placeholder}
     />
   );
@@ -39,7 +40,7 @@ function typeSelect({ options, name, onInputChangeHandler }) {
   );
 }
 
-function textareaType({ name, onInputChangeHandler }) {
+function textareaType({ name, onInputChangeHandler, onBlurInput }) {
   return (
     <>
       <textarea
@@ -47,6 +48,7 @@ function textareaType({ name, onInputChangeHandler }) {
         cols="30"
         rows="10"
         onChange={onInputChangeHandler}
+        onBlur={onBlurInput}
         className="bg-[whitesmoke] shadow-inner rounded-md px-2 py-1"
       ></textarea>
     </>
@@ -60,11 +62,12 @@ export default function InputGroup({
   options,
   onInputChangeHandler,
   placeholder,
+  onBlurInput
 }) {
   const inputTypes = {
-    text: () => typeText(name, placeholder, onInputChangeHandler),
+    text: () => typeText(name, placeholder, onInputChangeHandler, onBlurInput),
     select: () => typeSelect({ options, name, onInputChangeHandler }),
-    textarea: () => textareaType({ name, onInputChangeHandler }),
+    textarea: () => textareaType({ name, onInputChangeHandler, onBlurInput }),
   };
 
   const input = inputTypes[type ? type : "text"]();
