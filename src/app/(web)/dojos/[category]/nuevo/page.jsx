@@ -1,7 +1,7 @@
 "use client";
 import InputGroup from "@/components/form/inputGroup";
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Toast } from "@/components/providers/toastProvider";
 
@@ -36,6 +36,10 @@ export default function NewDojo() {
     getCategories();
   }, [session]);
 
+  useEffect(() => {
+    document.querySelector("input[name='title']").focus();
+  }, []);
+
   function onInputChangeHandler(e) {
     setFormData({
       ...formData,
@@ -45,11 +49,6 @@ export default function NewDojo() {
 
   async function onNewDojoSubmitHandler(e) {
     e.preventDefault();
-
-    if (categories === null) {
-      Toast.warning("selecciona una categoria")
-      return;
-    }
 
     // Si existen errores no haga el post
     if (Object.keys(errors).length > 0) {
@@ -65,25 +64,6 @@ export default function NewDojo() {
     });
     router.push("/dojos");
   }
-
-  //validamos la catgoria
-  const validateCategory = (fieldName, value) => {
-
-    const errorsCopy = { ...errors };
-    if (!value) {
-      errorsCopy[fieldName] = `La categoría es obligatoria`;
-    } else {
-      delete errorsCopy[fieldName];
-    }
-  
-  
-    setErrors(errorsCopy);
-  };
-
-  //devuelve error de la categoria
-  const isCategoryValid = (category) => {
-    return categories.find((e) => e.value === category) !== undefined;
-  };
 
   //construccion de validaciones
   const validateText = (fieldName, value) => {
@@ -110,10 +90,6 @@ export default function NewDojo() {
     const { name, value } = e.target;
     validateText(name, value);
   };
-  const handleBlurCategory= (e) => {
-    const { name, value } = e.target;
-    validateCategory(name, value);
-  }
 
   return (
     <>
@@ -144,13 +120,10 @@ export default function NewDojo() {
             name={"category"}
             label={"categoría"}
             onInputChangeHandler={onInputChangeHandler}
-            onBlurInput={handleBlurCategory}
             type={"select"}
             options={categories}
           />
-          {isCategoryValid("category")  && (
-            <p className="text-red-500">{isCategoryValid("category")}</p>
-          )}
+            <p className="text-red-500">Campo obligatorio</p>
           <InputGroup
             name={"content"}
             label={"Contenido"}
