@@ -1,7 +1,9 @@
+import { prisma } from "@/services/database/client";
 import CategoryTableRow from "./categoryTableRow";
 import ColumnTitleTable from "./columnTitleTable";
 
-export default function DashboardCategories() {
+export default async function DashboardCategories() {
+  const categories = await prisma.category.findMany();
   return (
     <>
       <div className="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
@@ -24,10 +26,28 @@ export default function DashboardCategories() {
                           </tr>
                         </thead>
                         <tbody>
-                          <CategoryTableRow
-                            name="Programacion"
-                            description="Para que te canses"
-                          />
+                          {categories.length ? (
+                            categories.map((e) => {
+                              return (
+                                <>
+                                  <CategoryTableRow
+                                    name={
+                                      e.category_name[0].toUpperCase() +
+                                      e.category_name.slice(1)
+                                    }
+                                    description={e.category_description}
+                                  />
+                                </>
+                              );
+                            })
+                          ) : (
+                            <>
+                              <CategoryTableRow
+                                name={"No hay categorías"}
+                                isActionRow={false}
+                              />
+                            </>
+                          )}
                         </tbody>
                       </table>
                     </div>

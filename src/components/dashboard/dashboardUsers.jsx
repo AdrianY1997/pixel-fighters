@@ -1,10 +1,10 @@
 import { prisma } from "@/services/database/client";
 import ColumnTitleTable from "./columnTitleTable";
 import UserTableRow from "./userTableRow";
+import { Toast } from "../providers/toastProvider";
 
 export default async function DashboardUsers() {
   const users = await prisma.user.findMany();
-
   return (
     <>
       <div className="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
@@ -29,7 +29,7 @@ export default async function DashboardUsers() {
                           </tr>
                         </thead>
                         <tbody>
-                          {users ? (
+                          {users.length ? (
                             users.map((e) => {
                               return (
                                 <UserTableRow
@@ -46,7 +46,12 @@ export default async function DashboardUsers() {
                               );
                             })
                           ) : (
-                            <></>
+                            <>
+                              <UserTableRow
+                                isActionRow={false}
+                                userName={"No hay usuarios"}
+                              />
+                            </>
                           )}
                         </tbody>
                       </table>

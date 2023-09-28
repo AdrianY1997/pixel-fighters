@@ -22,8 +22,6 @@ export default async function DashboardHome() {
     comment: Number(comments[0].count),
   };
 
-  console.log(counts);
-
   return (
     <>
       <TitleSection title="Dashboard"></TitleSection>

@@ -1,3 +1,5 @@
+"use client";
+
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
@@ -52,7 +54,10 @@ export default function Header({ user, role }) {
               />
             </svg>
           </button> */}
-          <button className="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full">
+          <button
+            onClick={() => signOut()}
+            className="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full"
+          >
             <span className="sr-only">Log out</span>
             <svg
               aria-hidden="true"

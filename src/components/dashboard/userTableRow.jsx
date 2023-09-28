@@ -6,15 +6,23 @@ import Status from "./userTable/status";
 import LastOnline from "./userTable/lastOnline";
 import Actions from "./userTable/actions";
 
-export default function UserTableRow({userName, email, experience,role,status,date}){
-    return(
-        <tr>
-            <UserTable userName={userName} email={email}/>
-            <Experience experience={experience}></Experience>
-            <Role role={role}></Role>
-            <Status status={status}></Status>
-            <LastOnline date={date}></LastOnline>
-            <Actions></Actions>
-        </tr>
-    )
+export default function UserTableRow({
+  userName,
+  email,
+  experience,
+  role,
+  status,
+  date,
+  isActionRow = true,
+}) {
+  return (
+    <tr>
+      <UserTable userName={userName} email={email} />
+      <Experience experience={experience}></Experience>
+      <Role role={role}></Role>
+      <Status status={status}></Status>
+      <LastOnline date={date}></LastOnline>
+      {isActionRow && <Actions></Actions>}
+    </tr>
+  );
 }

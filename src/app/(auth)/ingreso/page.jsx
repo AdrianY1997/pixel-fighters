@@ -1,11 +1,14 @@
 "use client";
 
 import InputGroup from "@/components/form/inputGroup";
+import { Toast } from "@/components/providers/toastProvider";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function LoginPage() {
+  Toast.success("sdasd");
+
   const [formData, setFormData] = useState({});
   function onInputChangeHandler(e) {
     setFormData({
