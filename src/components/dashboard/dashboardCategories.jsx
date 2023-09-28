@@ -20,8 +20,8 @@ export default async function DashboardCategories() {
                       <table className="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
                         <thead className="align-bottom">
                           <tr>
-                            <ColumnTitleTable columnName="Category" />
-                            <ColumnTitleTable columnName="Description" />
+                            <ColumnTitleTable columnName="Categoría" />
+                            <ColumnTitleTable columnName="Descripción" />
                             <ColumnTitleTable />
                           </tr>
                         </thead>

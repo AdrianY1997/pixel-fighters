@@ -28,7 +28,7 @@ export default async function DashboardDojos() {
                             <ColumnTitleTable columnName="Titulo" />
                             <ColumnTitleTable columnName="Puntuación" />
                             <ColumnTitleTable columnName="Autor" />
-                            <ColumnTitleTable columnName="Date Created" />
+                            <ColumnTitleTable columnName="Fecha de creación" />
                             <ColumnTitleTable columnName="Evento" />
                             <ColumnTitleTable />
                           </tr>

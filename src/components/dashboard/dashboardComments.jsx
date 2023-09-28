@@ -29,10 +29,10 @@ export default async function DashboardComments() {
                       <table className="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
                         <thead className="align-bottom">
                           <tr>
-                            <ColumnTitleTable columnName="Writer" />
-                            <ColumnTitleTable columnName="Publication" />
-                            <ColumnTitleTable columnName="Content" />
-                            <ColumnTitleTable columnName="Date Created" />
+                            <ColumnTitleTable columnName="Autor" />
+                            <ColumnTitleTable columnName="Publicación" />
+                            <ColumnTitleTable columnName="Contenido" />
+                            <ColumnTitleTable columnName="Fecha de creación" />
                             <ColumnTitleTable />
                           </tr>
                         </thead>
