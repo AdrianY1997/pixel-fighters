@@ -1,0 +1,63 @@
+CREATE TABLE user(
+    user_id VARCHAR(50) PRIMARY KEY UNIQUE,
+    user_name VARCHAR(50) NOT NULL,
+    user_email VARCHAR(50) NOT NULL UNIQUE,
+    user_password VARCHAR(15) NOT NULL,
+    user_level VARCHAR(20) NOT NULL,
+    user_role INT(1) NOT NULL,
+    user_datecreated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE dojoMember(
+    member_id VARCHAR(50) PRIMARY KEY UNIQUE,
+    member_user VARCHAR(50) NOT NULL,
+    member_dojo VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE dojo(
+    dojo_id VARCHAR(50) PRIMARY KEY UNIQUE,
+    dojo_name VARCHAR(50) NOT NULL,
+    dojo_description VARCHAR(250) NOT NULL,
+    dojo_category VARCHAR(50) NOT NULL 
+);
+
+CREATE TABLE category(
+    category_id VARCHAR(50) PRIMARY KEY UNIQUE,
+    category_name VARCHAR(50) NOT NULL,
+    category_description VARCHAR(250) NOT NULL
+);
+
+CREATE TABLE publication(
+    publication_id VARCHAR(50) PRIMARY KEY UNIQUE,
+    publication_title VARCHAR(50) NOT NULL,
+    publication_content VARCHAR(500) NOT NULL,
+    publication_calification DECIMAL(10,2) NOT NULL DEFAULT 0,
+    publication_datecreated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    publication_member VARCHAR(50) NOT NULL,
+    publication_dojo VARCHAR(50) NOT NULL,
+    publication_event INT(1) NOT NULL DEFAULT 0
+);
+
+CREATE TABLE comment(
+    comment_id VARCHAR(50) PRIMARY KEY UNIQUE,
+    comment_publication VARCHAR(50) NOT NULL,
+    comment_member VARCHAR(50) NOT NULL,
+    comment_description VARCHAR(250) NOT NULL,
+    comment_datecreated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE dojoMember ADD CONSTRAINT usermember FOREIGN KEY (member_user) REFERENCES user(user_id);
+
+ALTER TABLE dojoMember ADD CONSTRAINT dojomember FOREIGN KEY (member_dojo) REFERENCES dojo(dojo_id);
+
+ALTER TABLE dojo ADD CONSTRAINT category FOREIGN KEY (dojo_category) REFERENCES category(category_id);
+
+ALTER TABLE publication ADD CONSTRAINT memberpublication FOREIGN KEY (publication_member) REFERENCES dojoMember(member_id);
+
+ALTER TABLE comment ADD CONSTRAINT userComment FOREIGN KEY (comment_member) REFERENCES dojoMember(member_id);
+
+ALTER TABLE comment ADD CONSTRAINT publicationComment FOREIGN KEY (comment_publication) REFERENCES publication(publication_id);
+
+INSERT INTO user (user_id, user_name, user_email, user_password, user_level, user_role) 
+VALUES
+("1",, "Administrador", "admin@mail.com", "Admin@123", "N/A", "2")
